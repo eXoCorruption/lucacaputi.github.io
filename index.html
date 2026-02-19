@@ -126,10 +126,7 @@
   </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
-
-<!-- Nav -->
 <nav>
   <a href="#" class="nav-logo">Luca Caputi</a>
   <ul class="nav-links">
@@ -139,30 +136,27 @@
   </ul>
 </nav>
 
-<!-- Hero -->
 <section id="hero">
   <div class="hero-content">
     <span class="hero-tag">Offen für Stellenangebote</span>
-    <h1 class="hero-name">Luca <em>Caputi</em><br></h1>
+    <h1 class="hero-name">Luca <em>Caputi</em></h1>
     <p class="hero-title">In Ausbildung zum Applikationsentwickler</p>
-    <p class="hero-desc">Ich bin auf der suche nach einem Praktikum als Applikationsentwickler.</p>
+    <p class="hero-desc">Ich bin auf der Suche nach einem Praktikum als Applikationsentwickler.</p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">Projekte ansehen</a>
       <a href="#contact" class="btn btn-secondary">Kontakt aufnehmen</a>
     </div>
   </div>
-<div class="hero-right">
-  <div class="hero-photo">
-    <img src="profilbild.jpg" alt="Luca Caputi" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+  <div class="hero-right">
+    <div class="hero-photo">
+      <img src="profilbild.jpg" alt="Luca Caputi" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    </div>
   </div>
-</div>
-<div class="hero-bg-number" aria-hidden="true">01</div>
+  <div class="hero-bg-number" aria-hidden="true">01</div>
 </section>
 
-<!-- Marquee -->
 <div class="marquee-wrapper">
   <div class="marquee-track">
-    <!-- doubled for seamless loop -->
     <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
     <span class="marquee-item"><span class="marquee-dot"></span>JavaScript</span>
     <span class="marquee-item"><span class="marquee-dot"></span>HTML</span>
@@ -182,65 +176,40 @@
   </div>
 </div>
 
-<!-- About -->
 <div id="about" style="padding: 100px 48px;">
-  <div class="section-label reveal">Über mich</div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;" class="about-inner">
-    <div class="about-text reveal">
-      <h2>Leidenschaft für<br><em>gutes Design</em><br>& sauberen Code.</h2>
-      <p>Ich bin momentan in der Ausbildung zum Applikationsentwickler. Die Schule absolviere ich in Zürich bei der WISS.</p>
-      <p>Ich glaube daran, dass gute Software nicht nur funktioniert, sondern sich auch gut anfühlt – für die Nutzer genauso wie für die Entwickler, die sie warten.</p>
-      <div class="stats-grid">
-        <div class="stat">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Projekte abgeschlossen</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">0.5 J</div>
-          <div class="stat-label">Erfahrung</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">3</div>
-          <div class="stat-label">Zufriedene Kunden</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Kaffee getrunken</div>
-        </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start" class="about-inner">
+
+    <!-- LINKS: Text -->
+    <div class="reveal" style="display:flex;flex-direction:column;gap:40px;">
+      <div class="section-label" style="margin-bottom:0;">Über mich</div>
+      <div class="about-text">
+        <p>Ich bin momentan in der Ausbildung zum Applikationsentwickler. Die Schule absolviere ich in Zürich bei der WISS.</p>
+        <p>Ich glaube daran, dass gute Software nicht nur funktioniert, sondern sich auch gut anfühlt – für die Nutzer genauso wie für die Entwickler, die sie warten.</p>
       </div>
     </div>
-    <div class="skills-section reveal">
+
+    <!-- RECHTS: Grosser Titel + Skills + Statistiken -->
+    <div class="reveal" style="display:flex;flex-direction:column;gap:40px;">
+      <h2 style="font-family:var(--serif);font-size:clamp(52px,6vw,80px);line-height:1.05;letter-spacing:-2px;">Leidenschaft<br>für <em style="font-style:italic;color:var(--accent);">gutes<br>Design.</em></h2>
       <div class="skills-list">
-        <div class="skill-item" data-w="20%">
-          <span class="skill-name">JavaScript</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:20%"></div></div>
-        </div>
-        <div class="skill-item" data-w="35%">
-          <span class="skill-name">HTML</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:35%"></div></div>
-        </div>
-        <div class="skill-item" data-w="25%">
-          <span class="skill-name">Python</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:25%"></div></div>
-        </div>
-        <div class="skill-item" data-w="75%">
-          <span class="skill-name">SQL</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
-        </div>
-        <div class="skill-item" data-w="45%">
-          <span class="skill-name">GITHUB</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:45%"></div></div>
-        </div>
-        <div class="skill-item" data-w="40%">
-          <span class="skill-name">CSS</span>
-          <div class="skill-bar"><div class="skill-fill" style="--w:40%"></div></div>
-        </div>
+        <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="--w:20%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">HTML</span><div class="skill-bar"><div class="skill-fill" style="--w:35%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--w:25%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">GitHub</span><div class="skill-bar"><div class="skill-fill" style="--w:45%"></div></div></div>
+        <div class="skill-item"><span class="skill-name">CSS</span><div class="skill-bar"><div class="skill-fill" style="--w:40%"></div></div></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-number">4</div><div class="stat-label">Projekte abgeschlossen</div></div>
+        <div class="stat"><div class="stat-number">0.5 J</div><div class="stat-label">Erfahrung</div></div>
+        <div class="stat"><div class="stat-number">3</div><div class="stat-label">Zufriedene Kunden</div></div>
+        <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Kaffee getrunken</div></div>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- Projects -->
 <section id="projects">
   <div class="projects-header reveal">
     <h2>Ausgewählte<br><em>Projekte</em></h2>
@@ -248,46 +217,27 @@
   </div>
   <div class="projects-grid">
     <div class="project-card reveal">
-      <div class="project-thumb">
-        <div class="project-thumb-bg project-thumb-1"></div>
-        <div class="project-thumb-label">Projekt 01</div>
-      </div>
+      <div class="project-thumb"><div class="project-thumb-bg project-thumb-1"></div><div class="project-thumb-label">Projekt 01</div></div>
       <div class="project-info">
-        <div class="project-tags">
-          <span class="tag">React</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">PostgreSQL</span>
-        </div>
+        <div class="project-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div>
         <h3 class="project-name">Projektname Eins</h3>
         <p class="project-desc">Kurze Beschreibung des Projekts. Was hast du gebaut, welches Problem löst es, und was hast du dabei gelernt?</p>
         <a href="#" class="project-link">Zum Projekt →</a>
       </div>
     </div>
-    <div class="project-card reveal" style="transition-delay: 0.1s">
-      <div class="project-thumb">
-        <div class="project-thumb-bg project-thumb-2"></div>
-        <div class="project-thumb-label">Projekt 02</div>
-      </div>
+    <div class="project-card reveal" style="transition-delay:0.1s">
+      <div class="project-thumb"><div class="project-thumb-bg project-thumb-2"></div><div class="project-thumb-label">Projekt 02</div></div>
       <div class="project-info">
-        <div class="project-tags">
-          <span class="tag">TypeScript</span>
-          <span class="tag">API</span>
-        </div>
+        <div class="project-tags"><span class="tag">TypeScript</span><span class="tag">API</span></div>
         <h3 class="project-name">Projektname Zwei</h3>
         <p class="project-desc">Kurze Beschreibung des zweiten Projekts. Welche Technologien hast du eingesetzt?</p>
         <a href="#" class="project-link">Zum Projekt →</a>
       </div>
     </div>
-    <div class="project-card reveal" style="transition-delay: 0.2s">
-      <div class="project-thumb">
-        <div class="project-thumb-bg project-thumb-3"></div>
-        <div class="project-thumb-label">Projekt 03</div>
-      </div>
+    <div class="project-card reveal" style="transition-delay:0.2s">
+      <div class="project-thumb"><div class="project-thumb-bg project-thumb-3"></div><div class="project-thumb-label">Projekt 03</div></div>
       <div class="project-info">
-        <div class="project-tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">Tailwind</span>
-        </div>
+        <div class="project-tags"><span class="tag">Next.js</span><span class="tag">Tailwind</span></div>
         <h3 class="project-name">Projektname Drei</h3>
         <p class="project-desc">Drittes Projekt – vielleicht eine Landing Page, ein Dashboard, oder ein Open-Source-Tool?</p>
         <a href="#" class="project-link">Zum Projekt →</a>
@@ -296,53 +246,31 @@
   </div>
 </section>
 
-<!-- Contact -->
 <section id="contact">
   <div class="contact-left reveal">
     <div class="section-label">Kontakt</div>
     <h2>Lass uns<br><em>zusammen-</em><br>arbeiten.</h2>
-    <p>Sehen Sie mich als Teil für Ihr Team? Dann Kontiaktieren Sie mich!</p>
+    <p>Sehen Sie mich als Teil für Ihr Team? Dann kontaktieren Sie mich!</p>
     <div class="contact-info">
-      <div class="contact-row">
-        <span class="contact-row-label">E-Mail</span>
-        <a href="mailto:caputi.luca@hotmail.com" class="contact-row-value">caputi.luca@hotmail.com</a>
-      </div>
-      <div class="contact-row">
-        <span class="contact-row-label">GitHub</span>
-        <a href="https://github.com/eXoCorruption" class="contact-row-value" target="_blank">github.com/eXoCorruption</a>
-      </div>
-      <div class="contact-row">
-        <span class="contact-row-label">LinkedIn</span>
-        <a href="https://www.linkedin.com/in/luca-caputi-7b1259380" class="contact-row-value" target="_blank">linkedin.com/in/luca-caputi-7b1259380</a>
-      </div>
-      <div class="contact-row">
-        <span class="contact-row-label">Standort</span>
-        <span class="contact-row-value">Wettingen, Aargau</span>
-      </div>
+      <div class="contact-row"><span class="contact-row-label">E-Mail</span><a href="mailto:caputi.luca@hotmail.com" class="contact-row-value">caputi.luca@hotmail.com</a></div>
+      <div class="contact-row"><span class="contact-row-label">GitHub</span><a href="https://github.com/eXoCorruption" class="contact-row-value" target="_blank">github.com/eXoCorruption</a></div>
+      <div class="contact-row"><span class="contact-row-label">LinkedIn</span><a href="https://www.linkedin.com/in/luca-caputi-7b1259380" class="contact-row-value" target="_blank">linkedin.com/in/luca-caputi-7b1259380</a></div>
+      <div class="contact-row"><span class="contact-row-label">Standort</span><span class="contact-row-value">Wettingen, Aargau</span></div>
     </div>
   </div>
-  <div class="contact-form reveal" style="transition-delay: 0.15s">
+  <div class="contact-form reveal" style="transition-delay:0.15s">
     <form onsubmit="handleSubmit(event)">
       <div style="display:flex;flex-direction:column;gap:2px;">
-        <div class="form-group">
-          <input type="text" placeholder="Dein Name" required />
-        </div>
-        <div class="form-group">
-          <input type="email" placeholder="Deine E-Mail" required />
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Betreff" />
-        </div>
-        <div class="form-group">
-          <textarea placeholder="Deine Nachricht..."></textarea>
-        </div>
+        <div class="form-group"><input type="text" placeholder="Dein Name" required /></div>
+        <div class="form-group"><input type="email" placeholder="Deine E-Mail" required /></div>
+        <div class="form-group"><input type="text" placeholder="Betreff" /></div>
+        <div class="form-group"><textarea placeholder="Deine Nachricht..."></textarea></div>
         <button type="submit" class="btn-submit">Nachricht senden →</button>
       </div>
     </form>
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <p>© 2025 Luca Caputi — Gebaut mit ♥ und GitHub Pages</p>
   <div class="footer-links">
@@ -353,7 +281,6 @@
 </footer>
 
 <script>
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
@@ -363,43 +290,22 @@
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
-
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const skillItems = document.querySelectorAll('.skill-item');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.15 });
-
-  revealEls.forEach(el => observer.observe(el));
-  skillItems.forEach(el => observer.observe(el));
-
-  // Responsive about grid
+  document.querySelectorAll('.reveal, .skill-item').forEach(el => observer.observe(el));
   const aboutInner = document.querySelector('.about-inner');
   function checkAbout() {
-    if (window.innerWidth <= 900 && aboutInner) {
-      aboutInner.style.gridTemplateColumns = '1fr';
-    } else if (aboutInner) {
-      aboutInner.style.gridTemplateColumns = '1fr 1fr';
-    }
+    if (!aboutInner) return;
+    aboutInner.style.gridTemplateColumns = window.innerWidth <= 900 ? '1fr' : '1fr 1fr';
   }
   checkAbout();
   window.addEventListener('resize', checkAbout);
-
-  // Form submit
   function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.btn-submit');
     btn.textContent = '✓ Gesendet!';
-    btn.style.background = 'var(--accent)';
-    setTimeout(() => {
-      btn.textContent = 'Nachricht senden →';
-    }, 3000);
+    setTimeout(() => { btn.textContent = 'Nachricht senden →'; }, 3000);
   }
 </script>
 </body>
