@@ -1,326 +1,577 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio – Luca Caputi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0a; --surface: #111; --border: #1e1e1e;
-      --accent: #eb4319;
-      --muted: #444; --text: #e8e4dc; --text-dim: #888;
-      --serif: 'Playfair Display', Georgia, serif;
-      --mono: 'DM Mono', monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--mono); font-weight: 300; font-size: 14px; line-height: 1.7; cursor: none; overflow-x: hidden; }
-    .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; mix-blend-mode: difference; }
-    .cursor.hover { width: 40px; height: 40px; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.5; }
-    nav { position: fixed; top: 0; left: 0; right: 0; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
-    nav::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--bg), transparent); z-index: -1; }
-    .nav-logo { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
-    .hero-bg-number { position: absolute; right: -10000px; top: 50%; transform: translateY(-50%); font-family: var(--serif); font-size: clamp(200px, 30vw, 400px); color: transparent; -webkit-text-stroke: 1px var(--border); user-select: none; pointer-events: none; }
-    .hero-content { position: relative; }
-    .hero-tag { display: inline-block; background: var(--accent); color: var(--bg); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
-    .hero-name { font-family: var(--serif); font-size: clamp(52px, 7vw, 96px); line-height: 1.0; letter-spacing: -2px; margin-bottom: 8px; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
-    .hero-name em { font-style: italic; color: var(--accent); }
-    .hero-title { font-family: var(--serif); font-size: clamp(18px, 2.5vw, 28px); font-weight: 400; color: var(--text-dim); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
-    .hero-desc { color: var(--text-dim); max-width: 420px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
-    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 1s forwards; }
-    .btn { display: inline-block; padding: 12px 28px; text-decoration: none; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.25s; }
-    .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-primary:hover { background: transparent; color: var(--accent); outline: 1px solid var(--accent); }
-    .btn-secondary { background: transparent; color: var(--text); outline: 1px solid var(--border); }
-    .btn-secondary:hover { outline-color: var(--accent); color: var(--accent); }
-    .hero-right { display: flex; justify-content: flex-end; align-items: center; opacity: 0; animation: fadeIn 1.2s 0.6s forwards; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Luca Caputi – angehender Applikationsentwickler aus Wettingen, Schweiz. Web, Android und iOS.">
+<meta name="theme-color" content="#f4f5f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0b0f" media="(prefers-color-scheme: dark)">
+<title>Luca Caputi – Applikationsentwickler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    /* ✅ NUR EINE hero-photo Regel – kein ::before Overlay */
-    .hero-photo { width: min(360px, 90%); aspect-ratio: 3/4; position: relative; overflow: hidden; }
-    .hero-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent); z-index: 2; }
+:root{
+  --bg:#f4f5f9;
+  --text:#14161c;
+  --text-dim:#5c6472;
+  --text-faint:#8b93a3;
+  --accent:#1a5cff;
+  --accent-soft:rgba(26,92,255,.10);
+  --glass:rgba(255,255,255,.55);
+  --glass-strong:rgba(255,255,255,.75);
+  --glass-brd:rgba(255,255,255,.85);
+  --glass-shadow:0 8px 32px rgba(20,22,28,.07);
+  --hairline:rgba(20,22,28,.08);
+  --blob-1:#f6b8e4; --blob-2:#c3b4f8; --blob-3:#a9e7f7; --blob-4:#eaf49f; --blob-5:#ffd2b0;
+  --blob-op:.55;
+  --r-sm:12px; --r-md:20px; --r-lg:28px; --r-pill:999px;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --shell:min(1160px,100% - 2.5rem);
+}
+html[data-theme="dark"]{
+  --bg:#0a0b0f;
+  --text:#eef0f5;
+  --text-dim:#9aa3b4;
+  --text-faint:#6b7385;
+  --accent:#5c8dff;
+  --accent-soft:rgba(92,141,255,.14);
+  --glass:rgba(255,255,255,.055);
+  --glass-strong:rgba(255,255,255,.09);
+  --glass-brd:rgba(255,255,255,.11);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.35);
+  --hairline:rgba(255,255,255,.09);
+  --blob-1:#c0389c; --blob-2:#5b3fd0; --blob-3:#1f7fa8; --blob-4:#8a9a1f; --blob-5:#b5551f;
+  --blob-op:.40;
+}
 
-    .marquee-wrapper { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; background: var(--surface); }
-    .marquee-track { display: flex; animation: marquee 20s linear infinite; white-space: nowrap; }
-    .marquee-item { display: flex; align-items: center; gap: 20px; padding: 0 32px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
-    .marquee-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
-    section { padding: 100px 48px; }
-    .section-label { display: flex; align-items: center; gap: 16px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 60px; }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 200px; }
-    .about-text h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); line-height: 1.1; margin-bottom: 32px; letter-spacing: -1px; }
-    .about-text p { color: var(--text-dim); margin-bottom: 20px; }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
-    .stat { background: var(--surface); padding: 28px; border: 1px solid var(--border); }
-    .stat-number { font-family: var(--serif); font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-    .stat-label { font-size: 11px; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; }
-    .skills-list { display: flex; flex-direction: column; gap: 2px; }
-    .skill-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); transition: border-color 0.2s, background 0.2s; }
-    .skill-item:hover { border-color: var(--accent); background: #1a0800; }
-    .skill-name { font-size: 13px; }
-    .skill-bar { width: 120px; height: 2px; background: var(--border); position: relative; }
-    .skill-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1); width: 0; }
-    .skill-item.visible .skill-fill { width: var(--w); }
-    #projects { background: var(--surface); }
-    .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 32px; }
-    .projects-header h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); line-height: 1.1; letter-spacing: -1px; max-width: 500px; }
-    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-    .project-card { background: var(--bg); border: 1px solid var(--border); overflow: hidden; position: relative; transition: border-color 0.3s; }
-    .project-card:hover { border-color: var(--accent); }
-    .project-card:first-child { grid-column: span 2; }
-    .project-thumb { aspect-ratio: 16/9; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .project-thumb-bg { position: absolute; inset: 0; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .project-card:hover .project-thumb-bg { transform: scale(1.05); }
-    .project-thumb-1 { background: linear-gradient(135deg, #2a0a0a, #3a1010, #1a0505); }
-    .project-thumb-2 { background: linear-gradient(135deg, #1a0a05, #2a1505, #150805); }
-    .project-thumb-3 { background: linear-gradient(135deg, #1a0808, #2a0f0f, #100505); }
-    .project-thumb-label { position: relative; font-family: var(--serif); font-style: italic; font-size: 32px; color: rgba(255,255,255,0.12); user-select: none; }
-    .project-info { padding: 24px; }
-    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-    .tag { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(235,67,25,0.08); padding: 3px 8px; }
-    .project-name { font-family: var(--serif); font-size: 22px; margin-bottom: 8px; letter-spacing: -0.5px; }
-    .project-desc { color: var(--text-dim); font-size: 13px; margin-bottom: 20px; }
-    .project-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; transition: gap 0.2s; }
-    .project-link:hover { gap: 16px; }
-    #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-left h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
-    .contact-left p { color: var(--text-dim); margin-bottom: 40px; }
-    .contact-info { display: flex; flex-direction: column; gap: 2px; }
-    .contact-row { display: flex; align-items: center; gap: 20px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); }
-    .contact-row-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); min-width: 80px; }
-    .contact-row-value { color: var(--text); text-decoration: none; transition: color 0.2s; }
-    .contact-row-value:hover { color: var(--accent); }
-    .contact-form { display: flex; flex-direction: column; gap: 2px; }
-    .form-group input, .form-group textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: var(--mono); font-size: 13px; padding: 16px 20px; outline: none; transition: border-color 0.2s; resize: none; }
-    .form-group textarea { min-height: 140px; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
-    .btn-submit { background: var(--accent); color: var(--bg); border: none; padding: 16px 40px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; cursor: none; transition: background 0.2s, color 0.2s; align-self: flex-start; margin-top: 2px; }
-    .btn-submit:hover { background: transparent; color: var(--accent); outline: 1px solid var(--accent); }
-    footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-    footer p { color: var(--text-dim); font-size: 12px; }
-    .footer-links { display: flex; gap: 32px; }
-    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .reveal.visible { opacity: 1; transform: none; }
-    @media (max-width: 900px) {
-      nav { padding: 20px 24px; }
-      section { padding: 60px 24px; }
-      #hero { grid-template-columns: 1fr; padding: 120px 24px 60px; gap: 48px; }
-      .hero-right { justify-content: flex-start; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .project-card:first-child { grid-column: span 1; }
-      #contact { grid-template-columns: 1fr; gap: 48px; }
-      footer { flex-direction: column; align-items: flex-start; }
-      .projects-header { flex-direction: column; align-items: flex-start; }
-      .hero-bg-number { display: none; }
-    }
-  </style>
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);background:var(--bg);color:var(--text);
+  font-size:16px;line-height:1.65;font-weight:400;
+  overflow-x:hidden;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s ease,color .4s ease;
+}
+
+/* ---------- Blob-Hintergrund ---------- */
+.blobs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:var(--blob-op);transition:opacity .5s ease}
+.b1{width:46vw;height:46vw;min-width:340px;min-height:340px;background:var(--blob-1);top:-14vw;left:-8vw;animation:drift1 26s ease-in-out infinite}
+.b2{width:40vw;height:40vw;min-width:300px;min-height:300px;background:var(--blob-2);top:-10vw;right:-6vw;animation:drift2 32s ease-in-out infinite}
+.b3{width:38vw;height:38vw;min-width:280px;min-height:280px;background:var(--blob-3);top:44%;left:-12vw;animation:drift3 29s ease-in-out infinite}
+.b4{width:44vw;height:44vw;min-width:320px;min-height:320px;background:var(--blob-4);bottom:-16vw;right:-10vw;animation:drift1 34s ease-in-out infinite reverse}
+.b5{width:32vw;height:32vw;min-width:240px;min-height:240px;background:var(--blob-5);bottom:6%;left:32%;animation:drift2 27s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,4vw) scale(1.12)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,5vw) scale(.9)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4vw,-4vw) scale(1.08)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+
+/* ---------- Glas ---------- */
+.glass{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--glass-brd);
+  box-shadow:var(--glass-shadow);
+  border-radius:var(--r-lg);
+}
+html[data-theme="dark"] .glass{border-color:var(--glass-brd)}
+
+/* ---------- Layout ---------- */
+.shell{width:var(--shell);margin-inline:auto}
+section{padding:clamp(64px,9vw,116px) 0;scroll-margin-top:96px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);opacity:.5}
+h2.title{font-size:clamp(30px,4.4vw,46px);font-weight:500;letter-spacing:-.03em;line-height:1.12;margin-bottom:16px}
+.lede{color:var(--text-dim);max-width:56ch;font-size:17px}
+
+/* ---------- Navigation ---------- */
+nav{position:fixed;top:14px;left:0;right:0;z-index:200;display:flex;justify-content:center;padding-inline:1.25rem}
+.nav-inner{
+  width:var(--shell);display:flex;align-items:center;gap:16px;
+  padding:9px 9px 9px 22px;border-radius:var(--r-pill);
+  background:var(--glass-strong);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-brd);box-shadow:var(--glass-shadow);
+}
+.logo{font-weight:600;font-size:15px;letter-spacing:-.01em;color:var(--text);text-decoration:none;white-space:nowrap}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;list-style:none;margin-left:auto}
+.nav-links a{
+  display:block;padding:7px 15px;border-radius:var(--r-pill);
+  font-size:14px;color:var(--text-dim);text-decoration:none;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--text);background:var(--accent-soft)}
+.nav-tools{display:flex;gap:6px;align-items:center}
+.icon-btn{
+  width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;
+  border-radius:50%;border:1px solid var(--hairline);background:transparent;
+  color:var(--text);cursor:pointer;transition:background .2s,border-color .2s,transform .2s;
+}
+.icon-btn:hover{background:var(--accent-soft);border-color:transparent}
+.icon-btn:active{transform:scale(.93)}
+.icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#burger{display:none}
+html[data-theme="dark"] .sun{display:none}
+html[data-theme="light"] .moon{display:none}
+.mobile-panel{
+  position:fixed;top:76px;left:1.25rem;right:1.25rem;z-index:199;
+  padding:10px;display:none;flex-direction:column;gap:2px;
+}
+.mobile-panel.open{display:flex;animation:popIn .25s cubic-bezier(.16,1,.3,1)}
+.mobile-panel a{padding:13px 16px;border-radius:var(--r-md);color:var(--text);text-decoration:none;font-size:16px}
+.mobile-panel a:active{background:var(--accent-soft)}
+@keyframes popIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 26px;border-radius:var(--r-pill);
+  font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.01em;
+  text-decoration:none;cursor:pointer;border:1px solid transparent;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,background .2s,color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 20px rgba(26,92,255,.28)}
+.btn-primary:hover{box-shadow:0 10px 28px rgba(26,92,255,.36)}
+.btn-ghost{background:var(--glass-strong);color:var(--text);border-color:var(--glass-brd);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- Hero ---------- */
+#hero{padding-top:clamp(130px,17vw,190px);padding-bottom:clamp(48px,7vw,80px);text-align:center}
+.avatar{
+  width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:center 18%;
+  border:3px solid var(--glass-brd);box-shadow:var(--glass-shadow);
+  margin:0 auto 26px;display:block;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 16px 7px 12px;
+  border-radius:var(--r-pill);background:var(--glass-strong);border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  font-size:13px;color:var(--text-dim);margin-bottom:24px;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+h1{font-size:clamp(40px,7.5vw,76px);font-weight:600;letter-spacing:-.045em;line-height:1.03;margin-bottom:18px}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:clamp(17px,2.2vw,20px);color:var(--text-dim);max-width:48ch;margin:0 auto 34px;font-weight:300}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- Skill-Chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:44px}
+.chip{
+  padding:8px 16px;border-radius:var(--r-pill);font-size:13px;color:var(--text-dim);
+  background:var(--glass);border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  transition:color .2s,border-color .2s,transform .2s;
+}
+.chip:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+
+/* ---------- Zweispalter ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.card{padding:clamp(26px,3.4vw,40px)}
+.card p+p{margin-top:15px}
+.card p{color:var(--text-dim)}
+
+/* ---------- Stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.stat{padding:20px 16px;text-align:center;border-radius:var(--r-md)}
+.stat-n{font-size:30px;font-weight:600;letter-spacing:-.03em;color:var(--accent);line-height:1.1}
+.stat-l{font-size:11.5px;color:var(--text-faint);margin-top:5px;line-height:1.35}
+
+/* ---------- Plattform-Tabs ---------- */
+.tabs{display:flex;gap:4px;padding:5px;border-radius:var(--r-pill);margin:0 auto 32px;width:fit-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  padding:10px 22px;border-radius:var(--r-pill);border:none;background:transparent;
+  font-family:var(--sans);font-size:14px;font-weight:500;color:var(--text-dim);cursor:pointer;
+  transition:color .25s,background .25s;
+}
+.tab svg{width:16px;height:16px;fill:currentColor}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(26,92,255,.3)}
+.pane{display:none;padding:clamp(26px,3.4vw,40px)}
+.pane.active{display:block;animation:fadeUp .45s cubic-bezier(.16,1,.3,1)}
+.pane h3{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-bottom:12px}
+.pane p{color:var(--text-dim);max-width:62ch}
+.pane ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pane li{padding:7px 14px;border-radius:var(--r-pill);background:var(--accent-soft);color:var(--accent);font-size:13px}
+
+/* ---------- Projekte ---------- */
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.project{
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s;
+}
+.project:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 44px rgba(20,22,28,.13)}
+html[data-theme="dark"] .project:hover{box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.thumb{aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--accent-soft)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.project:hover .thumb img{transform:scale(1.05)}
+.thumb-empty{position:absolute;inset:0;display:grid;place-items:center;color:var(--text-faint);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.p-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{font-size:11px;letter-spacing:.05em;padding:4px 10px;border-radius:var(--r-pill);background:var(--accent-soft);color:var(--accent)}
+.project h3{font-size:19px;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
+.project p{font-size:14.5px;color:var(--text-dim);flex:1;margin-bottom:18px}
+.link{display:inline-flex;align-items:center;gap:7px;color:var(--accent);text-decoration:none;font-size:14px;font-weight:500;transition:gap .25s}
+.link:hover{gap:13px}
+
+/* ---------- Kontakt ---------- */
+#contact .split{align-items:stretch}
+.contact-side{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.loc{display:flex;align-items:center;gap:14px;padding:18px 22px;border-radius:var(--r-md)}
+.loc svg{width:20px;height:20px;flex:0 0 20px;stroke:var(--accent);fill:none;stroke-width:1.6}
+.loc-l{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
+.loc-v{font-size:15px;color:var(--text)}
+form{display:flex;flex-direction:column;gap:12px}
+label{font-size:13px;color:var(--text-dim);margin-bottom:6px;display:block}
+input,textarea{
+  width:100%;padding:14px 18px;border-radius:var(--r-md);
+  background:var(--glass-strong);border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  font-family:var(--sans);font-size:15px;color:var(--text);outline:none;resize:vertical;
+  transition:border-color .2s,box-shadow .2s;
+}
+textarea{min-height:140px}
+input::placeholder,textarea::placeholder{color:var(--text-faint)}
+input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.btn-submit{align-self:flex-start;margin-top:6px}
+
+/* ---------- Footer ---------- */
+footer{padding:36px 0 44px;border-top:1px solid var(--hairline);margin-top:40px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot p{font-size:13.5px;color:var(--text-faint)}
+.foot-links{display:flex;gap:22px}
+.foot-links a{font-size:13.5px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--accent)}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  :root{--shell:min(1160px,100% - 2rem)}
+  .split{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+  #burger{display:grid}
+  .nav-inner{padding-left:18px}
+  .head-row{align-items:flex-start}
+}
+@media (max-width:600px){
+  :root{--shell:min(1160px,100% - 1.75rem)}
+  body{font-size:15.5px}
+  .grid{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .avatar{width:92px;height:92px}
+  .blob{filter:blur(64px)}
+  .tabs{width:100%;justify-content:flex-start}
+  .btn-submit{align-self:stretch}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
+
+<div class="blobs" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="blob b4"></div><div class="blob b5"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
 <nav>
-  <a href="#" class="nav-logo">Luca Caputi</a>
-  <ul class="nav-links">
-    <li><a href="#about">Über mich</a></li>
-    <li><a href="#projects">Projekte</a></li>
-    <li><a href="#contact">Kontakt</a></li>
-  </ul>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">Luca <span>Caputi</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">Über mich</a></li>
+      <li><a href="#platforms">Plattformen</a></li>
+      <li><a href="#projects">Projekte</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme-toggle" aria-label="Farbschema wechseln">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <button class="icon-btn" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
 </nav>
 
+<div class="mobile-panel glass" id="mobile-panel">
+  <a href="#about">Über mich</a>
+  <a href="#platforms">Plattformen</a>
+  <a href="#projects">Projekte</a>
+  <a href="#contact">Kontakt</a>
+</div>
+
+<!-- ============ HERO ============ -->
 <section id="hero">
-  <div class="hero-content">
-    <span class="hero-tag">Status: Angestellt</span>
-    <h1 class="hero-name">Luca <em>Caputi</em></h1>
-    <p class="hero-title">In Ausbildung zum Applikationsentwickler</p>
-    <p class="hero-desc">Momentan Angestellt, Ab August 2027 verfügbar.</p>
+  <div class="shell">
+    <img src="img/profilbild.jpg" alt="Porträt von Luca Caputi" class="avatar" width="112" height="112">
+    <div class="badge"><span class="dot"></span>Verfügbar ab August 2027</div>
+    <h1>Ich baue Apps für<br><em>Web, Android und iOS</em>.</h1>
+    <p class="hero-sub">Luca Caputi — in Ausbildung zum Applikationsentwickler bei der WISS in Zürich. Neugierig auf alles, was sich bauen lässt.</p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">Projekte ansehen</a>
-      <a href="#contact" class="btn btn-secondary">Kontakt aufnehmen</a>
+      <a href="#contact" class="btn btn-ghost">Kontakt aufnehmen</a>
+    </div>
+    <div class="chips">
+      <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">Java</span>
+      <span class="chip">HTML &amp; CSS</span><span class="chip">SQL</span><span class="chip">Kotlin</span>
+      <span class="chip">Swift</span><span class="chip">Git &amp; GitHub</span><span class="chip">REST APIs</span>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-photo">
-      <img src="img/profilbild.jpg" alt="Luca Caputi" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
-    </div>
-  </div>
-  <div class="hero-bg-number" aria-hidden="true">01</div>
 </section>
 
-<div class="marquee-wrapper">
-  <div class="marquee-track">
-    <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>JavaScript</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>HTML</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Codierung, Decodierung</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>SQL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Git & GitHub</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>REST APIs</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>MS Products</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>JavaScript</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>HTML</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Codierung, Decodierung</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>SQL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Git & GitHub</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Schnitt</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>MS Products</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>JavaScript</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>HTML</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Codierung, Decodierung</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>SQL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Git & GitHub</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Schnitt</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>MS Products</span>
-  </div>
-</div>
-
-<div id="about" style="padding: 100px 48px;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start" class="about-inner">
-
-    <!-- LINKS: Text -->
-    <div class="reveal" style="display:flex;flex-direction:column;gap:40px;">
-      <div class="section-label" style="margin-bottom:0;">Über mich</div>
-      <div class="about-text">
-        <p>Ich bin momentan in der Ausbildung zum Applikationsentwickler. Die Schule absolviere ich in Zürich bei der WISS.</p>
-        <p>Schon seit meiner Kindheit fasziniert mich Technik in all ihren Facetten. Während anderer sich mit Spielzeug beschäftigten, habe ich meine Zeit damit verbracht, herauszufinden, wie Dinge Funktionieren. Vom Auseinandernehmen alter Geräte bis hin zum Austüfteln kleiner Projekte. Diese Neugier war für mich nie nur ein Hobby, sondern ein Beginn einer Leidenschaft, die mich bis heute antreibt.</p>
-        <p>Ein bedeutsamer Meilenstein auf meinem technischen Weg war der Bau meines ersten eigenen Computers. Die sorgfälltige Auswahl der Komponenten, das Zusammensetzen der Hardware und das anschliessende Optimieren der Konfiguration haben mir nicht nur praktisches Wissen vermittelt, sondern auch verdeutlicht, wie wichtig strukturiertes Denken und analytisches Arbeiten in der Technik sind.</p>
-        <p>Meine Motivation kommt aus dem stetigen Drang, Neues zu lernen und Probleme kreativ zu lösen. Ich freue mich darauf, mein Wissen weiter auszubauen, mich stetig weiterzuentwickeln und Herausforderungen anzunehmen, die mich persönlich und Fachlich wachsen lassen. Die Technik ist für mich nicht nur ein Arbeitsfeld, sondern eine Welt, in der ich jeden Tag aufs Neue begeistert entecke, wie viel Potenzial in scheibar einfachen Systemen steckt.</p>
+<!-- ============ ÜBER MICH ============ -->
+<section id="about">
+  <div class="shell split">
+    <div class="reveal">
+      <div class="eyebrow">Über mich</div>
+      <h2 class="title">Neugier, die nie<br>aufgehört hat.</h2>
+      <p class="lede">Schon als Kind wollte ich wissen, wie Dinge funktionieren. Heute ist daraus ein Beruf geworden.</p>
+      <div class="stats">
+        <div class="stat glass"><div class="stat-n">10</div><div class="stat-l">GitHub Kurse</div></div>
+        <div class="stat glass"><div class="stat-n">1 J</div><div class="stat-l">Erfahrung</div></div>
+        <div class="stat glass"><div class="stat-n">3</div><div class="stat-l">Kunden</div></div>
+        <div class="stat glass"><div class="stat-n">∞</div><div class="stat-l">Kaffee</div></div>
       </div>
     </div>
+    <div class="card glass reveal">
+      <p>Ich bin momentan in der Ausbildung zum Applikationsentwickler. Die Schule absolviere ich in Zürich bei der WISS.</p>
+      <p>Während sich andere mit Spielzeug beschäftigt haben, habe ich alte Geräte auseinandergenommen und kleine Projekte ausgetüftelt. Diese Neugier war nie nur ein Hobby, sondern der Beginn einer Leidenschaft, die mich bis heute antreibt.</p>
+      <p>Ein Meilenstein war der Bau meines ersten eigenen Computers: die Auswahl der Komponenten, das Zusammensetzen der Hardware und das Optimieren der Konfiguration haben mir gezeigt, wie viel strukturiertes Denken in der Technik steckt.</p>
+      <p>Meine Motivation kommt aus dem Drang, Neues zu lernen und Probleme kreativ zu lösen. Technik ist für mich kein Arbeitsfeld, sondern eine Welt, in der ich täglich entdecke, wie viel Potenzial in scheinbar einfachen Systemen steckt.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- RECHTS: Grosser Titel + Skills + Statistiken -->
-    <div class="reveal" style="display:flex;flex-direction:column;gap:40px;">
-      <h2 style="font-family:var(--serif);font-size:clamp(52px,6vw,80px);line-height:1.05;letter-spacing:-2px;">Leidenschaft<br>für <em style="font-style:italic;color:var(--accent);">gutes<br>Design.</em></h2>
-      <div class="skills-list">
-        <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="--w:20%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">HTML</span><div class="skill-bar"><div class="skill-fill" style="--w:35%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--w:25%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">GitHub</span><div class="skill-bar"><div class="skill-fill" style="--w:45%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">CSS</span><div class="skill-bar"><div class="skill-fill" style="--w:40%"></div></div></div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat"><div class="stat-number">10</div><div class="stat-label">GitHub Kurse Abgeschlossen</div></div>
-        <div class="stat"><div class="stat-number">1 J</div><div class="stat-label">Erfahrung</div></div>
-        <div class="stat"><div class="stat-number">3</div><div class="stat-label">Zufriedene Kunden</div></div>
-        <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Kaffee getrunken</div></div>
-      </div>
+<!-- ============ PLATTFORMEN ============ -->
+<section id="platforms">
+  <div class="shell">
+    <div style="text-align:center;margin-bottom:34px" class="reveal">
+      <div class="eyebrow">Plattformen</div>
+      <h2 class="title">Drei Welten, ein Handwerk.</h2>
+      <p class="lede" style="margin-inline:auto">Ich entwickle nicht nur fürs Web — mobile Entwicklung gehört genauso dazu.</p>
     </div>
 
-  </div>
-</div>
+    <div class="tabs glass reveal" role="tablist" aria-label="Plattformen">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="pane-web" id="tab-web">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2c1.4 0 2.9 2.4 3.4 6H8.6C9.1 6.4 10.6 4 12 4zM4.3 11h3.2c.1-2.1.5-4 1.1-5.5A8 8 0 004.3 11zm0 2a8 8 0 004.3 5.5c-.6-1.5-1-3.4-1.1-5.5H4.3zm5.2 0h5c-.1 2-.5 3.7-1 4.9-.5 1.3-1.1 2.1-1.5 2.1s-1-.8-1.5-2.1c-.5-1.2-.9-2.9-1-4.9zm6.9 0h3.3a8 8 0 01-4.3 5.5c.5-1.5.9-3.4 1-5.5zm0-2c-.1-2.1-.5-4-1-5.5a8 8 0 014.3 5.5h-3.3z"/></svg>
+        Web
+      </button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="pane-android" id="tab-android" tabindex="-1">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.5l1.6-2.8a.35.35 0 00-.6-.35L17 9.2a10.8 10.8 0 00-10 0L5.4 6.35a.35.35 0 00-.6.35l1.6 2.8A9.4 9.4 0 002 17h20a9.4 9.4 0 00-4.4-7.5zM7.3 14.2a.95.95 0 110-1.9.95.95 0 010 1.9zm9.4 0a.95.95 0 110-1.9.95.95 0 010 1.9z"/></svg>
+        Android
+      </button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="pane-ios" id="tab-ios" tabindex="-1">
+        <svg viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85s-1.8-.83-3-.81c-1.5.02-2.9.9-3.7 2.27-1.6 2.75-.4 6.8 1.1 9 .75 1.1 1.65 2.3 2.8 2.26 1.1-.05 1.55-.72 2.9-.72s1.75.72 2.95.7c1.2-.02 2-1.1 2.75-2.2.87-1.26 1.22-2.48 1.24-2.54-.03-.01-2.38-.91-2.4-3.6zM14.2 5.4c.6-.75 1.02-1.78.9-2.8-.87.03-1.94.58-2.57 1.32-.56.65-1.06 1.7-.93 2.7.98.08 1.98-.5 2.6-1.22z"/></svg>
+        iOS
+      </button>
+    </div>
 
+    <div class="pane glass active reveal" id="pane-web" role="tabpanel" aria-labelledby="tab-web">
+      <h3>Web-Entwicklung</h3>
+      <p>Statische Seiten und kleine Web-Apps von Grund auf: sauberes HTML, modernes CSS und JavaScript ohne unnötigen Ballast. Deployment über GitHub Pages, Versionierung mit Git.</p>
+      <ul><li>HTML &amp; CSS</li><li>JavaScript</li><li>Responsive Design</li><li>GitHub Pages</li><li>REST APIs</li></ul>
+    </div>
+
+    <div class="pane glass" id="pane-android" role="tabpanel" aria-labelledby="tab-android" hidden>
+      <h3>Android-Entwicklung</h3>
+      <p>Erfahrung mit nativer Android-Entwicklung in Android Studio: Aufbau von Activities und Layouts, Umgang mit dem Lifecycle, Anbindung von APIs und das Ausrollen auf echte Geräte. Java bringe ich aus meinen Minecraft-Projekten mit.</p>
+      <ul><li>Android Studio</li><li>Kotlin</li><li>Java</li><li>Material Design</li><li>Gradle</li></ul>
+    </div>
+
+    <div class="pane glass" id="pane-ios" role="tabpanel" aria-labelledby="tab-ios" hidden>
+      <h3>iOS-Entwicklung</h3>
+      <p>Erste Apps mit Swift und SwiftUI in Xcode: deklarative Views, Navigation, State-Handling und die Human Interface Guidelines von Apple. Mich reizt besonders, wie stark Design und Technik auf iOS zusammenspielen.</p>
+      <ul><li>Swift</li><li>SwiftUI</li><li>Xcode</li><li>Human Interface Guidelines</li><li>TestFlight</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJEKTE ============ -->
 <section id="projects">
-  <div class="projects-header reveal">
-    <h2>Ausgewählte<br><em>Projekte</em></h2>
-    <a href="https://github.com/eXoCorruption" class="btn btn-secondary" target="_blank">Alle auf GitHub →</a>
-  </div>
-  <div class="projects-grid">
-    <div class="project-card reveal">
- <div class="project-thumb">
-  <img src="img/githubpages.jpg" alt="Github Pages" style="width:100%;height:100%;object-fit:cover;display:block;">
-</div>
-      <div class="project-info">
-        <div class="project-tags"><span class="tag">Skills</span><span class="tag">Mardown</span><span class="tag">GitHub</span></div>
-        <h3 class="project-name">GitHub Pages</h3>
-        <p class="project-desc">Ich habe im GitHub Blog Page Projekt gelernt, wie man eine statische Website mit React und GitHub Pages erstellt.</p>
-        <a href="https://exocorruption.github.io/skills-github-pages/" class="project-link">Zum Projekt →</a>
+  <div class="shell">
+    <div class="head-row reveal">
+      <div>
+        <div class="eyebrow">Projekte</div>
+        <h2 class="title">Ausgewählte Arbeiten.</h2>
       </div>
+      <a href="https://github.com/eXoCorruption" class="btn btn-ghost" target="_blank" rel="noopener">Alle auf GitHub →</a>
     </div>
-    <div class="project-card reveal" style="transition-delay:0.1s">
-      <div class="project-thumb">
-  <img src="img/minecraft_mod.jpg" alt="Minecraft Modifikation" style="width:100%;height:100%;object-fit:cover;display:block;">
-</div>
-      <div class="project-info">
-        <div class="project-tags"><span class="tag">Java</span><span class="tag">Minecraft</span></div>
-        <h3 class="project-name">Minecraft Modifikation</h3>
-        <p class="project-desc">Ich bin im Moment dabei, eine Minecraft Modifikation zu erstellen, die verschiedene neue Sounds hinzufügt.</p>
-        <a href="https://github.com/eXoCorruption/minecraft-atmos" class="project-link">Zum Projekt →</a>
-      </div>
-    </div>
-    <div class="project-card reveal" style="transition-delay:0.2s">
-      <div class="project-thumb"><div class="project-thumb-bg project-thumb-3"></div><div class="project-thumb-label">Projekt 03</div></div>
-      <div class="project-info">
-        <div class="project-tags"><span class="tag">Next.js</span><span class="tag">Tailwind</span></div>
-        <h3 class="project-name">Projektname Drei</h3>
-        <p class="project-desc">Coming Soon</p>
-        <a href="#" class="project-link">Zum Projekt →</a>
-      </div>
+
+    <div class="grid">
+
+      <!-- ===== PROJEKT ===== -->
+      <article class="project glass reveal">
+        <div class="thumb"><img src="img/githubpages.jpg" alt="GitHub Pages Projekt" loading="lazy"></div>
+        <div class="p-body">
+          <div class="tags"><span class="tag">Markdown</span><span class="tag">GitHub</span></div>
+          <h3>GitHub Pages</h3>
+          <p>Im GitHub Blog-Page-Projekt gelernt, wie man eine statische Website mit React und GitHub Pages erstellt und veröffentlicht.</p>
+          <a href="https://exocorruption.github.io/skills-github-pages/" class="link" target="_blank" rel="noopener">Zum Projekt →</a>
+        </div>
+      </article>
+
+      <!-- ===== PROJEKT ===== -->
+      <article class="project glass reveal">
+        <div class="thumb"><img src="img/minecraft_mod.jpg" alt="Minecraft Modifikation" loading="lazy"></div>
+        <div class="p-body">
+          <div class="tags"><span class="tag">Java</span><span class="tag">Minecraft</span></div>
+          <h3>Minecraft Modifikation</h3>
+          <p>Eine Mod, die Minecraft um neue Umgebungs-Sounds erweitert. Aktuell in Entwicklung.</p>
+          <a href="https://github.com/eXoCorruption/minecraft-atmos" class="link" target="_blank" rel="noopener">Zum Projekt →</a>
+        </div>
+      </article>
+
+      <!-- ===== PROJEKT ===== -->
+      <!-- NEUES PROJEKT HINZUFÜGEN: Diesen <article>-Block kopieren, Bild, Tags,
+           Titel, Text und Link ersetzen. Bilder gehören in den Ordner img/. -->
+      <article class="project glass reveal">
+        <div class="thumb"><div class="thumb-empty">Coming soon</div></div>
+        <div class="p-body">
+          <div class="tags"><span class="tag">Android</span><span class="tag">Kotlin</span></div>
+          <h3>Nächstes Projekt</h3>
+          <p>Hier entsteht gerade etwas Neues — eine Android-App als nächster Schritt in der mobilen Entwicklung.</p>
+          <a href="https://github.com/eXoCorruption" class="link" target="_blank" rel="noopener">Bald verfügbar →</a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
+<!-- ============ KONTAKT ============ -->
 <section id="contact">
-  <div class="contact-left reveal">
-    <div class="section-label">Kontakt</div>
-    <h2>Lass uns<br><em>zusammen-</em><br>arbeiten.</h2>
-    <p>Sehen Sie mich als Teil für Ihr Team? Dann kontaktieren Sie mich!</p>
-    <div class="contact-info">
-      <div class="contact-row"><span class="contact-row-label">E-Mail</span><a href="mailto:caputi.luca@hotmail.com" class="contact-row-value">caputi.luca@icloud.com</a></div>
-      <div class="contact-row"><span class="contact-row-label">GitHub</span><a href="https://github.com/eXoCorruption" class="contact-row-value" target="_blank">github.com/eXoCorruption</a></div>
-      <div class="contact-row"><span class="contact-row-label">LinkedIn</span><a href="https://www.linkedin.com/in/luca-caputi-7b1259380" class="contact-row-value" target="_blank">linkedin.com/in/luca-caputi-7b1259380</a></div>
-      <div class="contact-row"><span class="contact-row-label">Standort</span><span class="contact-row-value">Wettingen, Aargau</span></div>
-    </div>
-  </div>
-  <div class="contact-form reveal" style="transition-delay:0.15s">
-    <form action="https://formspree.io/f/xqedyeqz" method="POST">
-      <div style="display:flex;flex-direction:column;gap:2px;">
-        <div class="form-group"><input type="text" name="name" placeholder="Dein Name" required /></div>
-        <div class="form-group"><input type="email" name="email" placeholder="Deine E-Mail" required /></div>
-        <div class="form-group"><input type="text" name="betreff"placeholder="Betreff" /></div>
-        <div class="form-group"><textarea name="nachricht" placeholder="Deine Nachricht..."></textarea></div>
-        <button type="submit" class="btn-submit">Nachricht senden →</button>
+  <div class="shell split">
+    <div class="contact-side reveal">
+      <div>
+        <div class="eyebrow">Kontakt</div>
+        <h2 class="title">Lass uns zusammen&shy;arbeiten.</h2>
+        <p class="lede">Sehen Sie mich als Teil Ihres Teams? Schreiben Sie mir — ich melde mich zurück.</p>
       </div>
-    </form>
+      <div class="loc glass">
+        <svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <div>
+          <div class="loc-l">Standort</div>
+          <div class="loc-v">Wettingen, Schweiz</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card glass reveal">
+      <form action="https://formspree.io/f/xqedyeqz" method="POST">
+        <div>
+          <label for="f-name">Name</label>
+          <input id="f-name" type="text" name="name" placeholder="Ihr Name" required>
+        </div>
+        <div>
+          <label for="f-mail">E-Mail</label>
+          <input id="f-mail" type="email" name="email" placeholder="ihre@mail.ch" required>
+        </div>
+        <div>
+          <label for="f-subj">Betreff</label>
+          <input id="f-subj" type="text" name="betreff" placeholder="Worum geht es?">
+        </div>
+        <div>
+          <label for="f-msg">Nachricht</label>
+          <textarea id="f-msg" name="nachricht" placeholder="Ihre Nachricht …" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-submit">Nachricht senden →</button>
+      </form>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2025 Luca Caputi — Gebaut mit ♥ und GitHub Pages</p>
-  <div class="footer-links">
-    <a href="https://github.com/eXoCorruption" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/luca-caputi-7b1259380" target="_blank">LinkedIn</a>
-    <a href="#">Impressum</a>
+  <div class="shell foot">
+    <p>© <span id="year">2026</span> Luca Caputi — gebaut mit ♥ und GitHub Pages</p>
+    <div class="foot-links">
+      <a href="https://github.com/eXoCorruption" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/luca-caputi-7b1259380" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </footer>
 
 <script>
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+(function(){
+  var root=document.documentElement;
+
+  /* Theme: gespeicherte Wahl, sonst Systemeinstellung */
+  var saved=null;
+  try{saved=localStorage.getItem('theme')}catch(e){}
+  var sysDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme',saved||(sysDark?'dark':'light'));
+
+  document.getElementById('theme-toggle').addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next)}catch(e){}
   });
-  document.querySelectorAll('a, button, .project-card, .skill-item').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+
+  /* Mobile-Menü */
+  var burger=document.getElementById('burger'),panel=document.getElementById('mobile-panel');
+  burger.addEventListener('click',function(){
+    var open=panel.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open);
   });
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal, .skill-item').forEach(el => observer.observe(el));
-  const aboutInner = document.querySelector('.about-inner');
-  function checkAbout() {
-    if (!aboutInner) return;
-    aboutInner.style.gridTemplateColumns = window.innerWidth <= 900 ? '1fr' : '1fr 1fr';
+  panel.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){panel.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+  });
+  document.addEventListener('click',function(e){
+    if(!panel.contains(e.target)&&!burger.contains(e.target)){
+      panel.classList.remove('open');burger.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* Plattform-Tabs */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(i){
+    tabs.forEach(function(t,j){
+      var on=i===j,pane=document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected',on);
+      t.tabIndex=on?0:-1;
+      pane.classList.toggle('active',on);
+      pane.hidden=!on;
+    });
   }
-  checkAbout();
-  window.addEventListener('resize', checkAbout);
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.textContent = '✓ Gesendet!';
-    setTimeout(() => { btn.textContent = 'Nachricht senden →'; }, 3000);
-  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(i)});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(!d)return;
+      e.preventDefault();
+      var n=(i+d+tabs.length)%tabs.length;
+      select(n);tabs[n].focus();
+    });
+  });
+
+  /* Reveal beim Scrollen */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
 </script>
 </body>
 </html>
